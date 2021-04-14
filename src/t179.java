@@ -19,7 +19,7 @@ class Solution_t179 {
         MyComparator cmp = new MyComparator();
         Arrays.sort(tmp, cmp);
 
-        if(tmp[0] == 0){
+        if (tmp[0] == 0) {
             return "0";
         }
 
@@ -29,21 +29,21 @@ class Solution_t179 {
         }
         return result.toString();
     }
-}
 
-class MyComparator implements Comparator<Integer> {
-    @Override
-    public int compare(Integer o1, Integer o2) {
-        String s1 = o1.toString() + o2.toString();
-        String s2 = o2.toString() + o1.toString();
-        long t1 = Long.parseLong(s1);
-        long t2 = Long.parseLong(s2);
-        if (t1 > t2) {
-            return -1;
-        } else if (t1 < t2) {
-            return 1;
-        } else {
-            return 0;
+    class MyComparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            String s1 = o1.toString() + o2.toString();
+            String s2 = o2.toString() + o1.toString();
+            long t1 = Long.parseLong(s1);
+            long t2 = Long.parseLong(s2);
+            if (t1 > t2) {
+                return -1;
+            } else if (t1 < t2) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 }
