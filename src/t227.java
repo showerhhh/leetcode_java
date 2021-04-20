@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
-public class t224 {
+public class t227 {
     public static void main(String[] args) {
         String s = "1+1+1";
-        Solution_t224 solution = new Solution_t224();
+        Solution_t227 solution = new Solution_t227();
         System.out.println(solution.calculate(s));
     }
 }
 
-class Solution_t224 {
+class Solution_t227 {
     public int calculate(String s) {
         //String[] tokens = {"(", "(", "10", "*", "(", "6", "/", "(", "(", "9", "+", "3", ")", "*", "-11", ")", ")", ")", "+", "17", ")", "+", "5"};
         String[] tokens = process(s);
@@ -17,7 +17,6 @@ class Solution_t224 {
     }
 
     String[] process(String s) {
-        // todo: 未处理负数
         ArrayList<String> result = new ArrayList<String>();
         int i = 0;
         while (i < s.length()) {
