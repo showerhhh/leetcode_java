@@ -39,8 +39,19 @@ class Solution_t872 {
 
     }
 
-    //    // 深度优先遍历or回溯模板
-    //    void dfs(int t) {
+    //    // 深度优先遍历模板
+    //    void dfs(Node node) {
+    //        if (node已被访问) {
+    //            return;
+    //        }
+    //        访问node;
+    //        for (Node neighbor : node的所有邻居节点) {
+    //            dfs(neighbor);
+    //        }
+    //    }
+    //
+    //    // 回溯模板
+    //    void traceback(int t) {
     //        if (满足输出条件) {
     //            输出解;
     //            return;
@@ -48,8 +59,8 @@ class Solution_t872 {
     //        for (int i = 1; i <= 尝试方法数; i++) {
     //            if (满足进一步搜索条件) {
     //                为进一步搜索所需要的状态打上标记;
-    //                dfs(t + 1);
-    //                恢复到打标记前的状态;  // 也就是说的{回溯一步}
+    //                traceback(t + 1);
+    //                恢复到打标记前的状态;  // 也就是说的"回溯一步"
     //            }
     //        }
     //    }
