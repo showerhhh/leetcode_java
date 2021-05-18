@@ -65,7 +65,6 @@ class Solution_t207 {
                 queue.add(i);
             }
         }
-
         while (!queue.isEmpty()) {
             int pre = queue.poll();
             numCourses--;

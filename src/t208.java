@@ -6,14 +6,14 @@ public class t208 {
 
 class Trie {
     Trie[] children;
-    boolean isEnd;
+    boolean isWord;
 
     /**
      * Initialize your data structure here.
      */
     public Trie() {
         children = new Trie[26];
-        isEnd = false;
+        isWord = false;
     }
 
     /**
@@ -29,7 +29,7 @@ class Trie {
             }
             node = node.children[index];
         }
-        node.isEnd = true;
+        node.isWord = true;
     }
 
     /**
@@ -37,11 +37,24 @@ class Trie {
      */
     public boolean search(String word) {
         Trie node = searchPrefix(word);
-        if (node != null && node.isEnd) {
+        if (node != null && node.isWord) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean search_2(String word) {
+        Trie curNode = this;  // 指向根节点
+        for (int i = 0; i < word.length(); i++) {
+            char curChar = word.charAt(i);
+            int index = curChar - 'a';
+            if (curNode.children[index] == null) {
+                return false;
+            }
+            curNode = curNode.children[index];
+        }
+        return curNode.isWord;
     }
 
     /**
