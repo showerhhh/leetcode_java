@@ -13,6 +13,7 @@ public class t剑指_Offer_37 {
 class Codec {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        // 每个叶子节点会有两个子节点null被加入字符串中
         if (root == null) {
             return "[]";
         }
@@ -42,6 +43,7 @@ class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
+        // 输入的字符串所表示的树中，每个叶子节点必须要有两个子节点null
         if (data.equals("[]")) {
             return null;
         }
