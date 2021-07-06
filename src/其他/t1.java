@@ -2,6 +2,12 @@ package 其他;
 
 public class t1 {
     // 01背包问题
+    /*
+    * dp问题注意：
+    * 1、dp的含义定义
+    * 2、边界初始化
+    * 3、下标i，j的变化
+    * */
     public int f(int[] w, int[] v, int W) {
         int N = w.length;
         int[][] dp = new int[N + 1][W + 1];
