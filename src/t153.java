@@ -9,20 +9,38 @@ public class t153 {
 class Solution_t153 {
     public int findMin(int[] nums) {
         int left = 0, right = nums.length - 1, mid;
-        while (left <= right) {
-            if(nums[left]<nums[right]){
-                // left到right范围内递增
-                return nums[left];
-            }
+        while (left < right) {
             mid = left + (right - left) / 2;
-            if (nums[mid] < nums[mid + 1] && nums[mid] < nums[mid - 1]) {
-                return nums[mid];
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
             } else {
-                if (nums[mid] > nums[left]) {
-                    left = mid + 1;
-                } else if (nums[mid] < nums[right]) {
-                    right = mid - 1;
-                }
+                right = mid;
+            }
+        }
+        // 分析所有可能的移动情况，最后都是以left==right结束
+        return nums[left];
+        //        // 另一二分查找模板，最后也都是以left==right结束循环
+        //        while (left<right){
+        //            mid=left+(right-left+1)/2;
+        //            if(xxx){
+        //                left=mid;
+        //            }else {
+        //                right=mid-1;
+        //            }
+        //        }
+    }
+
+    int findTarget(int[] nums, int target) {
+        // 二分查找模板
+        int left = 0, right = nums.length - 1, mid;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
         return -1;
