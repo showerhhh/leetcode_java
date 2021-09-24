@@ -20,6 +20,7 @@ class Trie {
      * Inserts a word into the trie.
      */
     public void insert(String word) {
+        // 向前缀树中插入字符串 word
         Trie node = this;
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
@@ -36,15 +37,7 @@ class Trie {
      * Returns if the word is in the trie.
      */
     public boolean search(String word) {
-        Trie node = searchPrefix(word);
-        if (node != null && node.isWord) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean search_2(String word) {
+        // 字符串 word 是否为字典树中的单词。
         Trie curNode = this;  // 指向根节点
         for (int i = 0; i < word.length(); i++) {
             char curChar = word.charAt(i);
@@ -61,25 +54,17 @@ class Trie {
      * Returns if there is any word in the trie that starts with the given prefix.
      */
     public boolean startsWith(String prefix) {
-        Trie node = searchPrefix(prefix);
-        if (node != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    Trie searchPrefix(String prefix) {
+        // 字符串 prefix 是否为字典树中单词的前缀。
         Trie node = this;
         for (int i = 0; i < prefix.length(); i++) {
             char ch = prefix.charAt(i);
             int index = ch - 'a';
             if (node.children[index] == null) {
-                return null;
+                return false;
             }
             node = node.children[index];
         }
-        return node;
+        return true;
     }
 }
 
