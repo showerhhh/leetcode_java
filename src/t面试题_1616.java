@@ -68,19 +68,20 @@ class Solution_t面试题_1616 {
     public int[] subSort_2(int[] array) {
         int m = -1, curMin = Integer.MAX_VALUE;
         for (int i = array.length - 1; i >= 0; i--) {
-            if (array[i] > curMin) {
-                m = i;
-            } else {
+            if (array[i] <= curMin) {
                 curMin = array[i];
+            } else {
+                // 当前值比最小值大，说明需要移动，从右向左遍历最终会记录最左边需要移动的元素
+                m = i;
             }
         }
 
         int n = -1, curMax = Integer.MIN_VALUE;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] < curMax) {
-                n = i;
-            } else {
+            if (array[i] >= curMax) {
                 curMax = array[i];
+            } else {
+                n = i;
             }
         }
 

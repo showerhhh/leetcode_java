@@ -3,12 +3,12 @@ import java.util.Stack;
 
 public class t面试题_0303 {
     public static void main(String[] args) {
-        System.out.println("未通过！");
+        System.out.println("test");
     }
 }
 
 class StackOfPlates {
-    ArrayList<Stack<Integer>> listOfStack = new ArrayList<>();
+    ArrayList<Stack<Integer>> stack_list = new ArrayList<>();
     int cap;
 
     public StackOfPlates(int cap) {
@@ -19,40 +19,33 @@ class StackOfPlates {
         if (cap <= 0) {
             return;
         }
-        for (int i = 0; i < listOfStack.size(); i++) {
-            Stack<Integer> s = listOfStack.get(i);
-            if (s.size() < cap) {
-                s.push(val);
-                return;
-            }
+        if (stack_list.isEmpty() || stack_list.get(stack_list.size() - 1).size() == cap) {
+            Stack<Integer> new_stack = new Stack<>();
+            stack_list.add(new_stack);
         }
-        Stack<Integer> s = new Stack<>();
-        s.push(val);
-        listOfStack.add(s);
+        stack_list.get(stack_list.size() - 1).push(val);
     }
 
     public int pop() {
-        for (int i = listOfStack.size() - 1; i >= 0; i--) {
-            Stack<Integer> s = listOfStack.get(i);
-            if (!s.isEmpty()) {
-                return s.pop();
-            } else {
-                listOfStack.remove(i);
-            }
+        if (stack_list.isEmpty()) {
+            return -1;
         }
-        return -1;
+        int res = stack_list.get(stack_list.size() - 1).pop();
+        if (stack_list.get(stack_list.size() - 1).isEmpty()) {
+            stack_list.remove(stack_list.size() - 1);
+        }
+        return res;
     }
 
     public int popAt(int index) {
-        while (index < listOfStack.size()) {
-            Stack<Integer> s = listOfStack.get(index);
-            if (!s.isEmpty()) {
-                return s.pop();
-            } else {
-                listOfStack.remove(index);
-            }
+        if (stack_list.isEmpty() || index >= stack_list.size() || index < 0) {
+            return -1;
         }
-        return -1;
+        int res = stack_list.get(index).pop();
+        if (stack_list.get(index).isEmpty()) {
+            stack_list.remove(index);
+        }
+        return res;
     }
 }
 
