@@ -12,7 +12,7 @@ class Solution_t35 {
         // nums={1,2,4,5} target=3
         // 1,2(right),4(left),5
 
-        // 由此可见，当相等分支合并到左移分支时，left指针指向第一个target或target应该插入的位置
+        // 由此可见，当相等分支合并到左移分支时，left指针指向第一个target或将target夹在中间
         int left = 0, right = nums.length - 1, mid;
         while (left <= right) {
             mid = left + (right - left) / 2;
@@ -32,7 +32,7 @@ class Solution_t35 {
         // nums={1,2,4,5} target=3
         // 1,2(right),4(left),5
 
-        // 由此可见，当相等分支合并到右移分支时，right指针指向第一个target或target应该（向前）插入的位置
+        // 由此可见，当相等分支合并到右移分支时，right指针指向第一个target或将target夹在中间
         int left = 0, right = nums.length - 1, mid;
         while (left <= right) {
             mid = left + (right - left) / 2;
