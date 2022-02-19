@@ -18,7 +18,7 @@ class Solution_t102 {
             return result;
         }
 
-        ArrayList<TreeNode> queue = new ArrayList<>();
+        ArrayList<TreeNode> queue = new ArrayList<>();  // 保存接下来要遍历的一行
         queue.add(root);
 
         while (!queue.isEmpty()) {
@@ -69,15 +69,15 @@ class Solution_t102 {
         return result;
     }
 
-    //    // 广度优先遍历模板
-    //    void bfs(Node root) {
-    //        ArrayList<Node> queue = new ArrayList<>();
+    // 广度优先遍历模板
+    //    void bfs(TreeNode root) {
+    //        ArrayList<TreeNode> queue = new ArrayList<>();  // 保存接下来要遍历的一层
     //        queue.add(root);
     //
     //        while (!queue.isEmpty()) {
-    //            Node node = queue.remove(0);
+    //            TreeNode node = queue.remove(0);
     //            访问node;
-    //            for (Node neighbor : node的所有邻居节点) {
+    //            for (TreeNode neighbor : node的所有邻居节点) {
     //                if (neighbor未被访问) {
     //                    queue.add(neighbor);
     //                }
