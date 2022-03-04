@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class t1 {
     public static void main(String[] args) {
         Solution_t1 solution = new Solution_t1();
@@ -20,6 +22,22 @@ class Solution_t1 {
                     tmp[1] = j;
                     return tmp;
                 }
+            }
+        }
+        return tmp;
+    }
+
+    public int[] twoSum_2(int[] nums, int target) {
+        int[] tmp = new int[2];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                int j = map.get(target - nums[i]);
+                tmp[0] = i;
+                tmp[1] = j;
+                return tmp;
+            } else {
+                map.put(nums[i], i);
             }
         }
         return tmp;

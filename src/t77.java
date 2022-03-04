@@ -21,7 +21,7 @@ class Solution_t77 {
             res.add(new ArrayList<>(list));
             return;
         }
-        for (int i = curNum; i <= n; i++) {
+        for (int i = curNum; i <= n; i++) {  // curNum为当前所有选择的起始位置
             list.add(i);
             backtrack(i + 1, list, n, k);
             list.remove(list.size() - 1);

@@ -70,20 +70,20 @@ class Solution_t102 {
     }
 
     // 广度优先遍历模板
-    //    void bfs(TreeNode root) {
-    //        ArrayList<TreeNode> queue = new ArrayList<>();  // 保存接下来要遍历的一层
-    //        queue.add(root);
+    //        void bfs(TreeNode root) {
+    //            ArrayList<TreeNode> queue = new ArrayList<>();  // 保存接下来要遍历的一层
+    //            queue.add(root);
     //
-    //        while (!queue.isEmpty()) {
-    //            TreeNode node = queue.remove(0);
-    //            访问node;
-    //            for (TreeNode neighbor : node的所有邻居节点) {
-    //                if (neighbor未被访问) {
-    //                    queue.add(neighbor);
+    //            while (!queue.isEmpty()) {
+    //                TreeNode node = queue.remove(0);
+    //                访问node;
+    //                for (TreeNode neighbor : node的所有邻居节点) {
+    //                    if (neighbor未被访问) {
+    //                        queue.add(neighbor);
+    //                    }
     //                }
     //            }
     //        }
-    //    }
 
     public class TreeNode {
         int val;
