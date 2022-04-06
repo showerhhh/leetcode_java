@@ -12,11 +12,26 @@ class Solution_t39 {
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         res = new ArrayList<>();
-        backtrack(0, 0, new ArrayList<>(), candidates, target);
+        backtracking(candidates, target, 0, 0, new ArrayList<>());
         return res;
     }
 
-    void backtrack(int idx, int sum, ArrayList<Integer> list, int[] candidates, int target) {
+    void backtracking(int[] candidates, int target, int idx, int sum, ArrayList<Integer> list) {
+        if (sum == target) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+        if (sum > target) {
+            return;
+        }
+        for (int i = idx; i < candidates.length; i++) {
+            list.add(candidates[i]);
+            backtracking(candidates, target, i, sum + candidates[i], list);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    void backtrack_2(int[] candidates, int target, int idx, int sum, ArrayList<Integer> list) {
         if (sum == target) {
             res.add(new ArrayList<>(list));
             return;
@@ -25,10 +40,10 @@ class Solution_t39 {
             return;
         }
         // 不选candidates[idx]
-        backtrack(idx + 1, sum, list, candidates, target);
+        backtrack_2(candidates, target, idx + 1, sum, list);
         // 选candidates[idx]
         list.add(candidates[idx]);
-        backtrack(idx, sum + candidates[idx], list, candidates, target);
+        backtrack_2(candidates, target, idx, sum + candidates[idx], list);
         list.remove(list.size() - 1);
     }
 }

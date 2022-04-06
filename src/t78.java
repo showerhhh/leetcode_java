@@ -8,19 +8,21 @@ public class t78 {
 }
 
 class Solution_t78 {
-    ArrayList<List<Integer>> res;
+    ArrayList<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
-        res = new ArrayList<>();
-        backtrack(0, new ArrayList<>(), nums);
+        backtrack(nums, 0, new ArrayList<>());
         return res;
     }
 
-    void backtrack(int idx, ArrayList<Integer> list, int[] nums) {
+    void backtrack(int[] nums, int idx, ArrayList<Integer> list) {
         res.add(new ArrayList<>(list));
+        if (idx == nums.length) {
+            return;
+        }
         for (int i = idx; i < nums.length; i++) {
             list.add(nums[i]);
-            backtrack(i + 1, list, nums);
+            backtrack(nums, i + 1, list);
             list.remove(list.size() - 1);
         }
     }

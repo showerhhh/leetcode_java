@@ -9,10 +9,9 @@ class Solution_t96 {
     public int numTrees(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
-        dp[1] = 1;
-        for (int m = 2; m <= n; m++) {
-            for (int i = 1; i <= m; i++) {
-                dp[m] += dp[i - 1] * dp[m - i];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= i - 1; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
             }
         }
         return dp[n];

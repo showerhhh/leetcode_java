@@ -1,26 +1,32 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class t46 {
+public class t47 {
     public static void main(String[] args) {
         System.out.println("test");
     }
 }
 
-class Solution_t46 {
-    ArrayList<List<Integer>> result = new ArrayList<>();
+class Solution_t47 {
+    ArrayList<List<Integer>> res;
 
-    public List<List<Integer>> permute(int[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        res = new ArrayList<>();
+        Arrays.sort(nums);
         backtracking(nums, new boolean[nums.length], new ArrayList<>());
-        return result;
+        return res;
     }
 
     void backtracking(int[] nums, boolean[] visited, ArrayList<Integer> list) {
         if (list.size() == nums.length) {
-            result.add(new ArrayList<>(list));
+            res.add(new ArrayList<>(list));
             return;
         }
         for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                continue;
+            }
             if (!visited[i]) {
                 visited[i] = true;
                 list.add(nums[i]);
