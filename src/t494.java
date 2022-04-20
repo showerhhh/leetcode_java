@@ -28,23 +28,36 @@ class Solution_t494 {
     }
 
     public int findTargetSumWays_2(int[] nums, int target) {
-        // 有bug
-        int M = nums.length;
-        int N = target * 2;
-        // dp[i][j]表示对前i个数字添加符号后和为j的表达式个数
-        int[][] dp = new int[M + 1][N + 1];
-        dp[0][0 + target] = 1;
-        for (int i = 1; i <= M; i++) {
-            for (int j = 0; j <= N; j++) {
-                if (j - nums[i - 1] >= 0 && j + nums[i - 1] <= N) {
-                    dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j + nums[i - 1]];
-                } else if (j - 1 >= 0) {
-                    dp[i][j] = dp[i - 1][j - nums[i - 1]];
+        int N = nums.length;
+        int sum = 0;
+        for (int i = 0; i < N; i++) {
+            sum += nums[i];
+        }
+        // 特殊情况直接返回
+        if (target + sum < 0) {
+            return 0;
+        }
+        if ((target + sum) % 2 == 1) {
+            return 0;
+        }
+        int M = (target + sum) / 2;
+        // dp[i][j]表示从前i个数中选出若干数字，和为j，有几种方法。
+        int[][] dp = new int[N + 1][M + 1];
+        // 初始化
+        dp[0][0] = 1;
+        for (int j = 1; j <= M; j++) {
+            dp[0][j] = 0;
+        }
+        // dp数组计算
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j <= M; j++) {
+                if (j - nums[i - 1] < 0) {
+                    dp[i][j] = dp[i - 1][j];
                 } else {
-                    dp[i][j] = dp[i - 1][j + nums[i - 1]];
+                    dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j];
                 }
             }
         }
-        return dp[M][target + target];
+        return dp[N][M];
     }
 }

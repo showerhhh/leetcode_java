@@ -4,42 +4,39 @@ public class t1 {
     // 01背包问题
     public int f_v1(int[] w, int[] v, int W) {
         int N = w.length;
-        // dp[i][j]表示从下标[0~i]的物品中取东西，放入容量为j的背包中，的最大价值。
-        int[][] dp = new int[N][W + 1];
+        // dp[i][j]表示从前i个物品（[0~i-1]）中选择，放入容量为j的背包中，最大价值。
+        int[][] dp = new int[N + 1][W + 1];
+        // 初始化
         for (int j = 0; j <= W; j++) {
-            if (j < w[0]) {
-                dp[0][j] = 0;
-            } else {
-                dp[0][j] = v[0];
-            }
+            dp[0][j] = 0;
         }
-        for (int i = 0; i < N; i++) {
-            dp[i][0] = 0;
-        }
-        for (int i = 1; i < N; i++) {
-            for (int j = 1; j <= W; j++) {
-                if (j - w[i] >= 0) {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
+        // 计算dp数组
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j <= W; j++) {
+                if (j - w[i - 1] >= 0) {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i - 1]] + v[i - 1]);
                 } else {
                     dp[i][j] = dp[i - 1][j];
                 }
             }
         }
-        return dp[N - 1][W];
+        return dp[N][W];
     }
 
     public int f_v2(int[] w, int[] v, int W) {
-        // 使用一位数组存储dp，需要注意：
-        // 1、当j<w[i]时，dp[j]=dp[j]，此时不做操作，因此可以改变遍历的范围
-        // 2、j必须逆序遍历
+        // 使用一位数组存储dp，需要注意：内层循环从后向前遍历，这样可以确保物品最多只能被添加一次。
         int N = w.length;
         int[] dp = new int[W + 1];
+        // 初始化
         for (int j = 0; j <= W; j++) {
             dp[j] = 0;
         }
-        for (int i = 0; i < N; i++) {
-            for (int j = W; j - w[i] >= 0; j--) {
-                dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+        // 计算dp数组
+        for (int i = 1; i <= N; i++) {
+            for (int j = W; j >= 0; j--) {
+                if (j - w[i] >= 0) {
+                    dp[j] = Math.max(dp[j], dp[j - w[i - 1]] + v[i - 1]);
+                }
             }
         }
         return dp[W];
