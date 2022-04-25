@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class t503 {
     public static void main(String[] args) {
@@ -13,19 +13,19 @@ public class t503 {
 
 class Solution_t503 {
     public int[] nextGreaterElements(int[] nums) {
-        ArrayList<Integer> stack = new ArrayList<Integer>();  // 存下标
+        Stack<Integer> stack = new Stack<>();  // 存下标
         int n = nums.length;
         int[] result = new int[nums.length];
         for (int i = 0; i < n; i++) {
             result[i] = -1;
         }
 
-        for (int i = 0; i < n * 2 - 1; i++) {
-            while (!stack.isEmpty() && nums[i % n] > nums[stack.get(stack.size() - 1)]) {
-                int index = stack.remove(stack.size() - 1);
-                result[index] = nums[i % n];
+        for (int i = 0; i < 2 * n; i++) {
+            while (!stack.isEmpty() && nums[i % n] > nums[stack.peek() % n]) {
+                int idx = stack.pop();
+                result[idx % n] = nums[i % n];
             }
-            stack.add(i % n);
+            stack.push(i);
         }
         return result;
     }

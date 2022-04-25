@@ -10,7 +10,7 @@ public class t84 {
 
 class Solution_t84 {
     public int largestRectangleArea(int[] heights) {
-        ArrayList<Integer> stack = new ArrayList<Integer>();
+        ArrayList<Integer> stack = new ArrayList<>();
         int max = 0;
 
         //左右两边各加一个0
@@ -33,5 +33,31 @@ class Solution_t84 {
             stack.add(i);
         }
         return max;
+    }
+
+    public int largestRectangleArea_2(int[] heights) {
+        int n = heights.length;
+        int[] minLeftIndex = new int[n];  // 记录i左侧（不包括i）第一个小于该柱子的下标
+        int[] minRightIndex = new int[n];  // 记录i右侧（不包括i）第一个小于该柱子的下标
+        for (int i = 0; i < n; i++) {
+            // 求i左侧（不包括i）第一个小于该柱子的下标
+            int lidx = i - 1;
+            while (lidx >= 0 && heights[lidx] >= heights[i]) {
+                lidx--;
+            }
+            minLeftIndex[i] = lidx;
+            // 求i右侧（不包括i）第一个小于该柱子的下标
+            int ridx = i + 1;
+            while (ridx < n && heights[ridx] >= heights[i]) {
+                ridx++;
+            }
+            minRightIndex[i] = ridx;
+        }
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            int area = (minRightIndex[i] - minLeftIndex[i] - 1) * heights[i];
+            maxArea = Math.max(maxArea, area);
+        }
+        return maxArea;
     }
 }

@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class t496 {
     public static void main(String[] args) {
@@ -15,21 +15,19 @@ public class t496 {
 
 class Solution_t496 {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        ArrayList<Integer> stack = new ArrayList<Integer>();
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < nums2.length; i++) {
-            while (!stack.isEmpty() && nums2[i] > stack.get(stack.size() - 1)) {
-                int k = stack.remove(stack.size() - 1);
-                int v = nums2[i];
-                map.put(k, v);
+            while (!stack.isEmpty() && nums2[i] > nums2[stack.peek()]) {
+                int idx = stack.pop();
+                map.put(nums2[idx], nums2[i]);
             }
-            stack.add(nums2[i]);
+            stack.push(i);
         }
-
+        int[] res = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
-            nums1[i] = map.getOrDefault(nums1[i], -1);
+            res[i] = map.getOrDefault(nums1[i], -1);
         }
-        return nums1;
+        return res;
     }
 }

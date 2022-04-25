@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class t739 {
     public static void main(String[] args) {
@@ -18,10 +18,10 @@ class Solution_t739 {
         for (int i = 0; i < n; i++) {
             result[i] = 0;
         }
-        ArrayList<Integer> stack = new ArrayList<Integer>();  // 存下标
+        Stack<Integer> stack = new Stack<>();  // 存下标
         for (int i = 0; i < n; i++) {
-            while (!stack.isEmpty() && T[i] > T[stack.get(stack.size() - 1)]) {
-                int index = stack.remove(stack.size() - 1);
+            while (!stack.isEmpty() && T[i] > T[stack.peek()]) {
+                int index = stack.pop();
                 result[index] = i - index;
             }
             stack.add(i);
