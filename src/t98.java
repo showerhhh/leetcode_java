@@ -8,6 +8,7 @@ public class t98 {
 
 class Solution_t98 {
     ArrayList<Integer> tmp = new ArrayList<Integer>();
+    TreeNode pre = null;
 
     public boolean isValidBST(TreeNode root) {
         func(root);
@@ -29,6 +30,19 @@ class Solution_t98 {
         func(node.left);
         tmp.add(node.val);
         func(node.right);
+    }
+
+    public boolean isValidBST_v2(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = isValidBST_v2(root.left);
+        if (pre != null && root.val <= pre.val) {
+            return false;
+        }
+        pre = root;
+        boolean right = isValidBST_v2(root.right);
+        return left && right;
     }
 
     public class TreeNode {

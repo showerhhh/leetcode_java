@@ -12,29 +12,40 @@ class Solution_t236 {
         return target;
     }
 
-    Flag f(TreeNode node, TreeNode p, TreeNode q) {
+    boolean[] f(TreeNode node, TreeNode p, TreeNode q) {
         // 判断以node为根节点的树中，是否包含p、q
         if (node == null) {
-            return new Flag();
+            return new boolean[]{false, false};
         }
-        Flag flag_left = f(node.left, p, q);
-        Flag flag_right = f(node.right, p, q);
-        Flag flag = new Flag();
-        flag.p = flag_left.p || node == p || flag_right.p;
-        flag.q = flag_left.q || node == q || flag_right.q;
-        if (flag.p && flag.q && target == null) {
-            target = node;
+        boolean[] left = f(node.left, p, q);
+        boolean[] right = f(node.right, p, q);
+        boolean[] res = new boolean[2];
+        res[0] = left[0] || right[0] || node == p;
+        res[1] = left[1] || right[1] || node == q;
+        if (res[0] && res[1] && target == null) {
+            target = node;  // 后续遍历使得pq的最近公共祖先先被赋给target
         }
-        return flag;
+        return res;
     }
 
-    class Flag {
-        boolean p;
-        boolean q;
-
-        Flag() {
-            p = false;
-            q = false;
+    public TreeNode lowestCommonAncestor_v2(TreeNode root, TreeNode p, TreeNode q) {
+        // 返回值指向p或q或pq的最近公共祖先，否则为null
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor_v2(root.left, p, q);
+        TreeNode right = lowestCommonAncestor_v2(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        } else if (left != null) {
+            return left;
+        } else if (right != null) {
+            return right;
+        } else {
+            return null;
         }
     }
 
