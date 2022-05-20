@@ -34,4 +34,26 @@ class Solution_t647 {
         int res = n * (n + 1) / 2 - countFalse;
         return res;
     }
+
+    public int countSubstrings_v2(String s) {
+        int n = s.length();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            int start = i, end = i;
+            while (start >= 0 && end < n && s.charAt(start) == s.charAt(end)) {
+                count++;
+                start--;
+                end++;
+            }
+        }
+        for (int i = 0; i < n - 1; i++) {
+            int start = i, end = i + 1;
+            while (start >= 0 && end < n && s.charAt(start) == s.charAt(end)) {
+                count++;
+                start--;
+                end++;
+            }
+        }
+        return count;
+    }
 }

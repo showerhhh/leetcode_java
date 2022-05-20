@@ -33,9 +33,7 @@ class Solution_t1 {
         for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(target - nums[i])) {
                 int j = map.get(target - nums[i]);
-                tmp[0] = i;
-                tmp[1] = j;
-                return tmp;
+                return new int[]{i, j};
             } else {
                 map.put(nums[i], i);
             }

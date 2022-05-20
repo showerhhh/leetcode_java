@@ -24,16 +24,15 @@ class Solution_t674 {
     }
 
     public int findLengthOfLCIS_v2(int[] nums) {
-        int len = 1, maxLen = 0;
+        int len = 1, maxLen = 1;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] > nums[i - 1]) {
                 len++;
             } else {
-                maxLen = Math.max(maxLen, len);
                 len = 1;
             }
+            maxLen = Math.max(maxLen, len);
         }
-        maxLen = Math.max(maxLen, len);
         return maxLen;
     }
 }

@@ -8,7 +8,7 @@ class Solution_t977 {
     public int[] sortedSquares(int[] nums) {
         int i = 0, j = nums.length - 1, k = nums.length - 1;
         int[] nums2 = new int[nums.length];
-        while (i < j) {
+        while (i <= j) {
             if (nums[i] * nums[i] > nums[j] * nums[j]) {
                 nums2[k] = nums[i] * nums[i];
                 k--;
@@ -19,7 +19,6 @@ class Solution_t977 {
                 j--;
             }
         }
-        nums2[k] = nums[i] * nums[i];
         return nums2;
     }
 }

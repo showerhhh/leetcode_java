@@ -5,39 +5,7 @@ public class t5 {
 }
 
 class Solution_t5 {
-    String res = "";
-
     public String longestPalindrome(String s) {
-        backtracking(s, 0);
-        return res;
-    }
-
-    void backtracking(String s, int idx) {
-        if (idx == s.length()) {
-            return;
-        }
-        for (int i = idx; i < s.length(); i++) {
-            if (isPalindrome(s.substring(idx, i + 1))) {
-                if (i - idx + 1 > res.length()) {
-                    res = s.substring(idx, i + 1);
-                }
-                backtracking(s, i + 1);
-            }
-        }
-    }
-
-    boolean isPalindrome(String s) {
-        // 判断字符串s是否为回文串
-        int n = s.length();
-        for (int i = 0; i < n / 2; i++) {
-            if (s.charAt(i) != s.charAt(n - 1 - i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String longestPalindrome_v2(String s) {
         int n = s.length();
         boolean[][] dp = new boolean[n][n];
         // 初始化
@@ -66,7 +34,7 @@ class Solution_t5 {
         return s.substring(maxi, maxj + 1);
     }
 
-    public String longestPalindrome_v3(String s) {
+    public String longestPalindrome_v2(String s) {
         int n = s.length();
         int maxLength = 0, maxi = 0, maxj = 0;
         for (int i = 0; i < n; i++) {

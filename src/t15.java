@@ -10,10 +10,11 @@ public class t15 {
 
 class Solution_t15 {
     public List<List<Integer>> threeSum(int[] nums) {
+        int target = 0;
         ArrayList<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) {  // nums[i]大于目标值时，不用继续找了
+            if (nums[i] > target) {  // nums[i]大于目标值时，不用继续找了
                 return res;
             }
             if (i > 0 && nums[i] == nums[i - 1]) {  // nums[i]去重
@@ -22,9 +23,9 @@ class Solution_t15 {
             int left = i + 1;
             int right = nums.length - 1;
             while (left < right) {
-                if (nums[i] + nums[left] + nums[right] < 0) {
+                if (nums[i] + nums[left] + nums[right] < target) {
                     left++;
-                } else if (nums[i] + nums[left] + nums[right] > 0) {
+                } else if (nums[i] + nums[left] + nums[right] > target) {
                     right--;
                 } else {
                     res.add(Arrays.asList(nums[i], nums[left], nums[right]));
