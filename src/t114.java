@@ -8,6 +8,7 @@ public class t114 {
 
 class Solution_t114 {
     ArrayList<TreeNode> list = new ArrayList<>();
+    TreeNode pre = null;
 
     public void flatten(TreeNode root) {
         if (root == null) {
@@ -31,6 +32,21 @@ class Solution_t114 {
         list.add(root);
         dfs(root.left);
         dfs(root.right);
+    }
+
+    public void flatten_2(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode l = root.left;
+        TreeNode r = root.right;
+        if (pre != null) {
+            pre.left = null;
+            pre.right = root;
+        }
+        pre = root;
+        flatten_2(l);
+        flatten_2(r);
     }
 
     public class TreeNode {

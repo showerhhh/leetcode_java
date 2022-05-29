@@ -12,8 +12,10 @@ public class t2 {
         // 计算dp数组
         for (int i = 1; i <= N; i++) {
             for (int j = 0; j <= W; j++) {
-                for (int k = 0; k * w[i - 1] <= j; k++) {
-                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - k * w[i - 1]] + k * v[i - 1]);
+                if (j - w[i - 1] >= 0) {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - w[i - 1]] + v[i - 1]);
+                } else {
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }

@@ -8,36 +8,29 @@ public class t76 {
 
 class Solution_t76 {
     public String minWindow(String s, String t) {
-        HashMap<Character, Integer> count = new HashMap<>();  // count记录每一字符还需要被覆盖多少次
+        HashMap<Character, Integer> count = new HashMap<>();
         for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
-            count.put(ch, count.getOrDefault(ch, 0) + 1);
+            count.put(t.charAt(i), count.getOrDefault(t.charAt(i), 0) + 1);
         }
-
-        int i = 0, minLength = s.length() + 1, min_i = 0, min_j = 0;
-        for (int j = 0; j < s.length(); j++) {
-            char ch_j = s.charAt(j);
-            if (count.containsKey(ch_j)) {
-                count.put(ch_j, count.get(ch_j) - 1);
-            }
-            while (check(count)) {
-                int length = j - i + 1;
-                if (length < minLength) {
-                    minLength = length;
-                    min_i = i;
-                    min_j = j;
+        int l = 0, r = 0;  // 滑动窗口，左闭右开区间
+        int minLength = Integer.MAX_VALUE, minL = 0, minR = 0;
+        while (r < s.length()) {
+            count.put(s.charAt(r), count.getOrDefault(s.charAt(r), 0) - 1);
+            r++;
+            while (check(count) && l < r) {  // 当窗口满足题意时，l指针左移
+                if (r - l < minLength) {  // 判断并记录
+                    minLength = r - l;
+                    minL = l;
+                    minR = r;
                 }
-                char ch_i = s.charAt(i);
-                if (count.containsKey(ch_i)) {
-                    count.put(ch_i, count.get(ch_i) + 1);
-                }
-                i++;
+                count.put(s.charAt(l), count.getOrDefault(s.charAt(l), 0) + 1);
+                l++;
             }
         }
-        if (minLength == s.length() + 1) {
+        if (minLength == Integer.MAX_VALUE) {
             return "";
         } else {
-            return s.substring(min_i, min_j + 1);
+            return s.substring(minL, minR);
         }
     }
 
