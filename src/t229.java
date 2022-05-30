@@ -35,7 +35,7 @@ class Solution_t229 {
     }
 
     public List<Integer> majorityElement_2(int[] nums) {
-        // 抵消阶段
+        // 摩尔投票找出两个出现次数最多的元素
         int candidate1 = nums[0];
         int count1 = 0;
         int candidate2 = nums[0];
@@ -59,7 +59,7 @@ class Solution_t229 {
             }
         }
 
-        // 投票阶段
+        // 判断这两个元素的出现次数是否超过了n/3
         int k1 = 0;
         int k2 = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -80,14 +80,9 @@ class Solution_t229 {
     }
 
     public int moore(int[] nums) {
-        // moore投票法可以选出“选出票数超过一半的那个人”，若没有“超过一半的那个人”，则返回-1。
         // 分为抵消阶段和计数阶段
         // 抵消阶段可以得到票数最多的一个候选人（或有其他人和该候选人的票数一样多）
-        // 通过计数阶段看该候选人的票数是否超出一半
-
-        // 如果至多选一个代表，那他的票数至少要超过一半⌊1/2⌋的票数；
-        // 如果至多选两个代表，那他们的票数至少要超过⌊1/3⌋的票数；
-        // 如果至多选m个代表，那他们的票数至少要超过⌊1/(m+1)⌋的票数。
+        // 计数阶段看该候选人的票数是否超出一半
 
         // 抵消阶段
         int candidate = nums[0];
