@@ -11,16 +11,17 @@ class Solution_t142 {
             return null;
         }
         ListNode fast = head, slow = head;
-        while (true) {
-            if (fast.next == null || fast.next.next == null) {
-                return null;
-            }
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
             if (fast == slow) {
                 break;
             }
         }
+        if (fast == null || fast.next == null) {
+            return null;
+        }
+
         ListNode cur = head;
         while (cur != slow) {
             cur = cur.next;

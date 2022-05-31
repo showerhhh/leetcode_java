@@ -8,65 +8,67 @@ public class t215 {
 }
 
 class Solution_t215 {
+    int[] heap;
+    int n;
+
     public int findKthLargest(int[] nums, int k) {
-        //        Arrays.sort(nums);
-        quickSort(nums, 0, nums.length - 1);
-        //        mergeSort(nums, 0, nums.length - 1);
-        return nums[nums.length - k];
+        buildHeap(nums);
+        for (int i = 0; i < k - 1; i++) {
+            delete();
+        }
+        return delete();
     }
 
-    void quickSort(int[] nums, int low, int high) {
-        if (low < high) {
-            int pos = partition(nums, low, high);
-            quickSort(nums, low, pos - 1);
-            quickSort(nums, pos + 1, high);
+    void buildHeap(int[] nums) {
+        n = nums.length;
+        heap = new int[n + 1];
+        System.arraycopy(nums, 0, heap, 1, n);
+        for (int i = n / 2; i >= 1; i--) {
+            heapify(i);
         }
     }
 
-    int partition(int[] nums, int low, int high) {
-        int pivot = nums[low];
-        while (low < high) {
-            while (low < high && nums[high] >= pivot)
-                high--;
-            nums[low] = nums[high];
-            while (low < high && nums[low] <= pivot)
-                low++;
-            nums[high] = nums[low];
-        }
-        nums[low] = pivot;
-        return low;
+    int delete() {
+        int res = heap[1];
+        swap(1, n);
+        n--;
+        heapify(1);
+        return res;
     }
 
-    void mergeSort(int[] nums, int low, int high) {
-        if (low < high) {
-            int mid = (high - low) / 2 + low;
-            mergeSort(nums, low, mid);
-            mergeSort(nums, mid + 1, high);
-            merge(nums, low, mid, high);
-        }
-    }
-
-    void merge(int[] nums, int low, int mid, int high) {
-        int[] T = new int[high - low + 1];  //临时数组
-        int i = low, j = mid + 1, k = 0;
-
-        while (i <= mid && j <= high) {
-            if (nums[i] < nums[j]) {
-                T[k++] = nums[i++];
+    void heapify(int i) {
+        // 对i号节点向下调整
+        int j = 2 * i;
+        while (j <= n) {
+            if (j + 1 <= n && heap[j + 1] > heap[j]) {
+                j++;
+            }
+            if (heap[j] > heap[i]) {
+                swap(i, j);
+                i = j;
+                j = 2 * i;
             } else {
-                T[k++] = nums[j++];
+                break;
             }
         }
-        while (i <= mid) {
-            T[k++] = nums[i++];
-        }
-        while (j <= high) {
-            T[k++] = nums[j++];
-        }
+    }
 
-        //复制
-        for (int l = 0; l < T.length; l++) {
-            nums[low + l] = T[l];
+    void adjustUp(int i) {
+        int j = i / 2;
+        while (j >= 1) {
+            if (heap[j] < heap[i]) {
+                swap(i, j);
+                i = j;
+                j = i / 2;
+            } else {
+                break;
+            }
         }
+    }
+
+    void swap(int i, int j) {
+        int tmp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = tmp;
     }
 }
