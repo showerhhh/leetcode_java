@@ -20,15 +20,17 @@ class Solution_t22 {
             res.add(builder.toString());
             return;
         }
-        if (leftCount < n) {
-            builder.append('(');
-            backtracking(n, leftCount + 1, rightCount, builder);
-            builder.deleteCharAt(builder.length() - 1);
+        if (leftCount > n || rightCount > leftCount) {
+            return;
         }
-        if (rightCount < leftCount) {
-            builder.append(')');
-            backtracking(n, leftCount, rightCount + 1, builder);
-            builder.deleteCharAt(builder.length() - 1);
-        }
+
+        // 加左括号
+        builder.append('(');
+        backtracking(n, leftCount + 1, rightCount, builder);
+        builder.deleteCharAt(builder.length() - 1);
+        // 加右括号
+        builder.append(')');
+        backtracking(n, leftCount, rightCount + 1, builder);
+        builder.deleteCharAt(builder.length() - 1);
     }
 }
