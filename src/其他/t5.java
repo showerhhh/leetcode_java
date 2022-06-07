@@ -42,7 +42,7 @@ class UnionFind {
             root = map.get(root);
         }
         // 路径压缩
-        while (map.get(x) != root) {
+        while (x != root) {
             int tmp = map.get(x);
             map.put(x, root);
             x = tmp;
