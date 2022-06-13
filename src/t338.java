@@ -23,16 +23,17 @@ class Solution_t338 {
     }
 
     public int[] countBits_2(int n) {
-        int[] res = new int[n + 1];
-        for (int i = 0; i <= n; i++) {
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        for (int i = 1; i <= n; i++) {
             if (i % 2 == 1) {
                 // 奇数i的二进制中1的个数比i-1的多1个
-                res[i] = res[i - 1] + 1;
+                dp[i] = dp[i - 1] + 1;
             } else {
                 // 偶数的二进制中1的个数和i/2的相等
-                res[i] = res[i / 2];
+                dp[i] = dp[i / 2];
             }
         }
-        return res;
+        return dp;
     }
 }

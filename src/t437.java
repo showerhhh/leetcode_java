@@ -32,6 +32,29 @@ class Solution_t437 {
         cur -= node.val;  // 只是为了回溯代码的对称性，可省略
     }
 
+    public int pathSum_2(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        int l = pathSum_2(root.left, targetSum);
+        int r = pathSum_2(root.right, targetSum);
+        count = 0;
+        pathFromRoot(root, 0, targetSum);
+        return l + r + count;
+    }
+
+    void pathFromRoot(TreeNode root, int sum, int targetSum) {
+        if (root == null) {
+            return;
+        }
+        sum += root.val;
+        if (sum == targetSum) {
+            count++;
+        }
+        pathFromRoot(root.left, sum, targetSum);
+        pathFromRoot(root.right, sum, targetSum);
+    }
+
     public class TreeNode {
         int val;
         TreeNode left;
