@@ -3,6 +3,8 @@ package 其他;
 import java.util.HashMap;
 
 public class t5 {
+    public static void main(String[] args) {
+    }
 }
 
 class UnionFind {

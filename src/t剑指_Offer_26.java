@@ -9,17 +9,11 @@ class Solution_t剑指_Offer_26 {
         if (B == null) {
             return false;
         }
-        return check(A, B);
-    }
-
-    boolean check(TreeNode A, TreeNode B) {
-        // 已知B不为空，判断B是不是A的子结构。
         if (A == null) {
             return false;
         }
-
-        boolean flag1 = check(A.left, B);
-        boolean flag2 = check(A.right, B);
+        boolean flag1 = isSubStructure(A.left, B);
+        boolean flag2 = isSubStructure(A.right, B);
         boolean flag3 = pipei(A, B);
         return flag1 || flag2 || flag3;
     }

@@ -41,4 +41,35 @@ class Solution_t394 {
         }
         return res;
     }
+
+    public String decodeString_2(String s) {
+        StringBuilder builder = new StringBuilder();
+        Stack<Integer> nums_stack = new Stack<>();
+        int count = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == '[') {
+                nums_stack.push(count);
+                count = 0;
+                builder.append(ch);
+            } else if (Character.isAlphabetic(ch)) {
+                builder.append(ch);
+            } else if (Character.isDigit(ch)) {
+                count = count * 10 + ch - '0';
+            } else if (ch == ']') {
+                char x = builder.charAt(builder.length() - 1);
+                StringBuilder tmpbuilder = new StringBuilder();  // tmpbuilder保存待重复字符串
+                while (x != '[') {
+                    tmpbuilder.insert(0, x);
+                    builder.deleteCharAt(builder.length() - 1);
+                    x = builder.charAt(builder.length() - 1);
+                }
+                builder.deleteCharAt(builder.length() - 1);
+                int t = nums_stack.pop();
+                for (int i = 0; i < t; i++) {
+                    builder.append(tmpbuilder);
+                }
+            }
+        }
+        return builder.toString();
+    }
 }

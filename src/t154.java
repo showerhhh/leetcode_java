@@ -20,7 +20,6 @@ class Solution_t154 {
                 right--;
             }
         }
-        // 所有移动情况最后都是以left==right结束
         return nums[left];
     }
 }

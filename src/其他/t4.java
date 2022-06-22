@@ -35,7 +35,6 @@ public class t4 {
     void merge(int[] nums, int low, int mid, int high) {
         int[] T = new int[high - low + 1];  //临时数组
         int i = low, j = mid + 1, k = 0;
-
         while (i <= mid && j <= high) {
             if (nums[i] < nums[j]) {
                 T[k++] = nums[i++];
@@ -49,10 +48,7 @@ public class t4 {
         while (j <= high) {
             T[k++] = nums[j++];
         }
-
         //复制
-        for (int l = 0; l < T.length; l++) {
-            nums[low + l] = T[l];
-        }
+        System.arraycopy(T, 0, nums, low, T.length);
     }
 }
