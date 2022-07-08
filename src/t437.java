@@ -11,7 +11,7 @@ class Solution_t437 {
     HashMap<Integer, Integer> prefixSumCount = new HashMap<>();  // key是前缀和，value是大小为key的前缀和出现的次数
 
     public int pathSum(TreeNode root, int targetSum) {
-        prefixSumCount.put(0, 1);  // 前缀和为0的个数至少有一个
+        prefixSumCount.put(0, 1);  // 前缀和为0的个数至少有一个，在回溯时当cur==targetSum时才能加上。
         dfs(root, targetSum, 0);
         return count;
     }

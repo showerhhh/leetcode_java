@@ -8,37 +8,37 @@ public class t剑指_Offer_34 {
 }
 
 class Solution_t剑指_Offer_34 {
-    ArrayList<List<Integer>> result = new ArrayList<>();
-    ArrayList<Integer> t = new ArrayList<>();
+    ArrayList<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> pathSum(TreeNode root, int target) {
         if (root == null) {
-            return result;
+            return res;
         }
-        dfs(root, target);
-        return result;
+        backtracking(root, target, 0, new ArrayList<>());
+        return res;
     }
 
-    void dfs(TreeNode root, int target) {
-        if (root.left == null && root.right == null && root.val == target) {
-            t.add(root.val);
-            // 复制t
-            ArrayList<Integer> copy_t = new ArrayList<>(t);
-            result.add(copy_t);
-            t.remove(t.size() - 1);
+    void backtracking(TreeNode root, int target, int sum, ArrayList<Integer> list) {
+        if (root.left == null && root.right == null) {
+            list.add(root.val);
+            sum += root.val;
+            if (sum == target) {
+                res.add(new ArrayList<>(list));
+            }
+            list.remove(list.size() - 1);
             return;
         }
 
-        t.add(root.val);
-        target -= root.val;
+        list.add(root.val);
+        sum += root.val;
         if (root.left != null) {
-            dfs(root.left, target);
+            backtracking(root.left, target, sum, list);
         }
         if (root.right != null) {
-            dfs(root.right, target);
+            backtracking(root.right, target, sum, list);
         }
-        target += root.val;
-        t.remove(t.size() - 1);
+        sum -= root.val;
+        list.remove(list.size() - 1);
     }
 
     public class TreeNode {

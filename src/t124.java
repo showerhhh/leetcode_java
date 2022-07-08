@@ -12,7 +12,7 @@ class Solution_t124 {
     }
 
     int f(TreeNode root) {
-        // 返回：在以root为根的树中，以root为起点的路径的最大和。（如果为负，则返回0）
+        // 返回：在以root为根的树中，以root为起点的路径的最大和。（路径可以为空，即最大和为0）
         if (root == null) {
             return 0;
         }

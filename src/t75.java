@@ -33,7 +33,7 @@ class Solution_t75 {
     }
 
     public void sortColors_2(int[] nums) {
-        // 单指针，两遍扫描
+        // 两遍扫描
         int p = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
@@ -50,7 +50,7 @@ class Solution_t75 {
     }
 
     public void sortColors_3(int[] nums) {
-        // 双指针，一遍扫描
+        // 一遍扫描
         int n = nums.length;
         int p0 = 0, p2 = n - 1;
         int i = 0;

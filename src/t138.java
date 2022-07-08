@@ -18,8 +18,8 @@ class Solution_t138 {
         // 建立复制节点的next和random链接
         p = head;
         while (p != null) {
-            map.get(p).next = map.get(p.next);
-            map.get(p).random = map.get(p.random);
+            map.get(p).next = map.getOrDefault(p.next, null);
+            map.get(p).random = map.getOrDefault(p.random, null);
             p = p.next;
         }
         return map.get(head);
