@@ -13,10 +13,12 @@ class Solution_t279 {
             dp[i] = Integer.MAX_VALUE;
         }
         // 计算dp数组
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j * j <= i; j++) {
-                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+        for (int j = 1; j <= n; j++) {
+            int tmp = Integer.MAX_VALUE;
+            for (int i = 1; i * i <= j; i++) {
+                tmp = Math.min(tmp, dp[j - i * i] + 1);
             }
+            dp[j] = tmp;
         }
         return dp[n];
     }

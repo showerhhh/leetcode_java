@@ -32,6 +32,23 @@ class Solution_t377 {
     }
 
     public int combinationSum4_v2(int[] nums, int target) {
+        int[] dp = new int[target + 1];
+        // 初始化
+        dp[0] = 1;
+        // 计算dp数组
+        for (int j = 1; j <= target; j++) {
+            int tmp = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (j - nums[i] >= 0) {
+                    tmp += dp[j - nums[i]];
+                }
+            }
+            dp[j] = tmp;
+        }
+        return dp[target];
+    }
+
+    public int combinationSum4_v3(int[] nums, int target) {
         res = new ArrayList<>();
         backtracking(nums, target, new ArrayList<>(), 0);
         return res.size();

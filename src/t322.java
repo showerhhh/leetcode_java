@@ -1,8 +1,8 @@
 public class t322 {
     public static void main(String[] args) {
         Solution_t322 solution = new Solution_t322();
-        int[] coins = new int[]{2};
-        int amount = 3;
+        int[] coins = new int[]{186, 419, 83, 408};
+        int amount = 6249;
         solution.coinChange(coins, amount);
     }
 }

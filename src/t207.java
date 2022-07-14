@@ -49,13 +49,13 @@ class Solution_t207 {
     }
 
     public boolean canFinish_2(int numCourses, int[][] prerequisites) {
-        adj = new ArrayList<>();
-        degrees = new int[numCourses];
+        ArrayList<Integer>[] adj = new ArrayList[numCourses];
         for (int i = 0; i < numCourses; i++) {
-            adj.add(new ArrayList<>());
+            adj[i] = new ArrayList<>();
         }
+        int[] degrees = new int[numCourses];
         for (int[] cp : prerequisites) {
-            adj.get(cp[1]).add(cp[0]);
+            adj[cp[1]].add(cp[0]);
             degrees[cp[0]]++;
         }
 
@@ -66,9 +66,8 @@ class Solution_t207 {
             }
         }
         while (!queue.isEmpty()) {
-            int pre = queue.poll();
-            numCourses--;
-            for (int neighbor : adj.get(pre)) {
+            int p = queue.poll();
+            for (int neighbor : adj[p]) {
                 degrees[neighbor]--;
                 if (degrees[neighbor] == 0) {
                     queue.add(neighbor);
@@ -76,6 +75,11 @@ class Solution_t207 {
             }
         }
 
-        return numCourses == 0;
+        for (int i = 0; i < numCourses; i++) {
+            if (degrees[i] != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
