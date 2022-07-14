@@ -1,4 +1,4 @@
-package 蔚来吴晓庆;
+package 蔚来笔试练习;
 
 public class t2 {
     public static void main(String[] args) {
