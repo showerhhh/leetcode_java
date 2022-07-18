@@ -7,70 +7,49 @@ public class t剑指_Offer_67 {
 }
 
 class Solution_t剑指_Offer_67 {
-
     public int strToInt(String str) {
-        // i指向第一个非空字符
-        int i;
-        for (i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (ch != ' ') {
-                break;
-            }
-        }
-
-        // 这种""或这种"       "字符串，返回0
-        if (i == str.length()) {
+        // 处理前后空格
+        str = str.trim();
+        if (str.length() == 0) {
             return 0;
         }
-        // 第一个非空字符不是数字且不是正负号，返回0
-        char tmp = str.charAt(i);
-        if (!Character.isDigit(tmp) && tmp != '+' && tmp != '-') {
+        // 处理符号
+        int sign = 1;
+        if (str.charAt(0) == '+') {
+            sign = 1;
+            str = str.substring(1);
+        } else if (str.charAt(0) == '-') {
+            sign = -1;
+            str = str.substring(1);
+        }
+        if (str.length() == 0) {
             return 0;
         }
-
-        // 处理符号位
-        char sign = '+';
-        if (tmp == '+') {
-            sign = '+';
-            i++;
-            if (i == str.length() || !Character.isDigit(str.charAt(i))) {
-                return 0;
-            }
-        } else if (tmp == '-') {
-            sign = '-';
-            i++;
-            if (i == str.length() || !Character.isDigit(str.charAt(i))) {
-                return 0;
-            }
-        }
-
-        // start指向第一个数字字符，end指向第一个非数字字符
-        int start = i;
-        for (; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (!Character.isDigit(ch)) {
+        // 获取数字部分
+        int i = 0;
+        while (i < str.length()) {
+            if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                 break;
             }
+            i++;
         }
-        int end = i;
-        return f(start, end, sign, str);
-    }
-
-    int f(int start, int end, char sign, String str) {
+        str = str.substring(0, i);
+        if (str.length() == 0) {
+            return 0;
+        }
+        // 转换数字部分，因为数字有可能超出范围，所以不能求出来再判断，而应该边求边判断
         long sum = 0;
         long MAX = (long) Math.pow(2, 31) - 1;
         long MIN = -(long) Math.pow(2, 31);
-        if (sign == '+') {
-            for (int i = start; i < end; i++) {
-                char ch = str.charAt(i);
+        if (sign == 1) {
+            for (char ch : str.toCharArray()) {
                 sum = sum * 10 + (ch - '0');
                 if (sum >= MAX) {
                     return (int) MAX;
                 }
             }
         } else {
-            for (int i = start; i < end; i++) {
-                char ch = str.charAt(i);
+            for (char ch : str.toCharArray()) {
                 sum = sum * 10 - (ch - '0');
                 if (sum <= MIN) {
                     return (int) MIN;

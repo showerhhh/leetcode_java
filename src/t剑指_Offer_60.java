@@ -9,7 +9,7 @@ public class t剑指_Offer_60 {
 class Solution_t剑指_Offer_60 {
     public double[] dicesProbability(int n) {
         int m = n * 6;
-        int[][] dp = new int[n + 1][m + 1];
+        int[][] dp = new int[n + 1][m + 1];  // dp[i][j]表示i个骰子，和为j的排列数。（最终结果除以6**n即可）
         for (int j = 1; j <= 6; j++) {
             dp[1][j] = 1;
         }
