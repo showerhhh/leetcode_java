@@ -9,22 +9,22 @@ class Solution_t1186 {
         if (arr.length == 1) {
             return arr[0];
         }
-        int[] dp = new int[arr.length];
-        int[] dp_raw = new int[arr.length];
-        dp[1] = Math.max(arr[0], arr[1]);
-        dp_raw[1] = Math.max(arr[0] + arr[1], arr[1]);
-        int res = dp[1];
-        for (int i = 2; i < arr.length; i++) {
-            dp[i] = fourMax(dp[i - 1] + arr[i], dp_raw[i - 1], dp_raw[i - 1] + arr[i], arr[i]);
-            dp_raw[i] = Math.max(dp_raw[i - 1] + arr[i], arr[i]);
-            res = Math.max(res, dp[i]);
+        int n = arr.length;
+        int[] dp_1 = new int[n];
+        int[] dp_2 = new int[n];
+        dp_1[1] = Math.max(arr[1], arr[0] + arr[1]);
+        dp_2[1] = Math.max(arr[0], arr[1]);
+        int res = Math.max(dp_1[1], dp_2[1]);
+        for (int i = 2; i < n; i++) {
+            dp_1[i] = Math.max(arr[i], dp_1[i - 1] + arr[i]);
+            dp_2[i] = Math.max(dp_1[i - 1], dp_2[i - 1] + arr[i]);
+            res = threeMax(res, dp_1[i], dp_2[i]);
         }
         return res;
     }
 
-    int fourMax(int a, int b, int c, int d) {
-        int x = Math.max(a, b);
-        int y = Math.max(c, d);
-        return Math.max(x, y);
+    int threeMax(int a, int b, int c) {
+        int d = Math.max(a, b);
+        return Math.max(c, d);
     }
 }

@@ -1,10 +1,13 @@
 package NC面试高频榜单;
 
+import java.util.Scanner;
+
 public class NC1 {
     public static void main(String[] args) {
         Solution_NC1 solution = new Solution_NC1();
         solution.solve("1", "99");
     }
+
 }
 
 class Solution_NC1 {

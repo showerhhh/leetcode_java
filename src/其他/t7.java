@@ -8,11 +8,14 @@ public class t7 {
         t7 t = new t7();
         ArrayList<Integer> l1 = new ArrayList<>();
         l1.add(7);
+        l1.add(7);
         l1.add(8);
         l1.add(9);
         ArrayList<Integer> l2 = new ArrayList<>();
         l2.add(5);
         l2.add(6);
+        l2.add(7);
+        l2.add(7);
         System.out.println(t.multi(l1, l2));
     }
 
