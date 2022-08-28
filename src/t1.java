@@ -34,9 +34,8 @@ class Solution_t1 {
             if (map.containsKey(target - nums[i])) {
                 int j = map.get(target - nums[i]);
                 return new int[]{i, j};
-            } else {
-                map.put(nums[i], i);
             }
+            map.put(nums[i], i);
         }
         return tmp;
     }

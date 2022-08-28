@@ -23,7 +23,6 @@ class Solution_t404 {
         if (root.left != null) {
             if (root.left.left == null && root.left.right == null) {
                 sum += root.left.val;
-
             }
             leftSum(root.left);
         }

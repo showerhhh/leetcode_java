@@ -37,8 +37,7 @@ class Solution_t501 {
 
         if (count == maxCount) {
             res.add(root.val);
-        }
-        if (count > maxCount) {
+        } else if (count > maxCount) {
             maxCount = count;
             res.clear();
             res.add(root.val);
@@ -57,11 +56,9 @@ class Solution_t501 {
             } else {
                 count = 1;
             }
-            // 下面两个if的顺序不能换
             if (count == maxCount) {
                 res.add(nums[i]);  // 处理众数可能有多个的情况。
-            }
-            if (count > maxCount) {
+            } else if (count > maxCount) {
                 maxCount = count;
                 // 当频率最大值更新时，清空res，并将当前值放入。
                 res.clear();

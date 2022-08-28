@@ -36,19 +36,18 @@ class Solution_t872 {
         if (node.right != null) {
             dfs(list, node.right);
         }
-
     }
 
-    //    // 深度优先遍历模板
-    //    void dfs(Node node) {
-    //        if (node已被访问) {
-    //            return;
+    //        // 深度优先遍历模板
+    //        void dfs(Node node) {
+    //            if (node已被访问) {
+    //                return;
+    //            }
+    //            访问node;
+    //            for (Node neighbor : node的所有邻居节点) {
+    //                dfs(neighbor);
+    //            }
     //        }
-    //        访问node;
-    //        for (Node neighbor : node的所有邻居节点) {
-    //            dfs(neighbor);
-    //        }
-    //    }
 
     //    // 回溯模板
     //    void traceback(int t) {

@@ -37,7 +37,7 @@ class Solution_t75 {
         int p = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
-                swap(nums, p, i);
+                swap(nums, p, i);  // 换出来到i位置上的，一定非0
                 p++;
             }
         }
@@ -56,11 +56,11 @@ class Solution_t75 {
         int i = 0;
         while (i <= p2) {
             while (i <= p2 && nums[i] == 2) {
-                swap(nums, p2, i);
+                swap(nums, p2, i);  // 换出来到i位置上的，有可能为0、1、2，为2要继续换，为零要用下面的if代码
                 p2--;
             }
             if (nums[i] == 0) {
-                swap(nums, p0, i);
+                swap(nums, p0, i);  // 换出来到i位置上的，一定非0，又因为2已经被换走了，所以一定不是2，那就是1
                 p0++;
             }
             i++;

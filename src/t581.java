@@ -23,7 +23,7 @@ class Solution_t581 {
             }
             rightMin = Math.min(rightMin, nums[i]);
         }
-        if (left >= right) {
+        if (left == n - 1 || right == 0) {
             return 0;
         } else {
             return right - left + 1;
